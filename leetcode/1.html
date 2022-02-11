@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [2,7,11,15];
+        // var twoSum = function(nums, target) {
+        //     //静态哈希表法
+        //     const map = new Map();
+        //     for(let i = 0;i < nums.length;i++){
+        //         map.set(nums[i],i);
+        //     }
+        //     for(let i = 0;i < nums.length;i++){
+        //         const diff = target - nums[i];
+        //         if(map.has(diff) && map.get(diff) !== i){
+        //             return [i,map.get(diff)];
+        //         }
+        //     }
+        // };
+        var twoSum = function (nums, target) {
+            //动态哈希表法
+            const map = new Map();
+            for (let i = 0; i < nums.length; i++) {
+                const num1 = nums[i];
+                const num2 = target - nums[i];
+                if(map.has(num2)){
+                    return [map.get(num2),i];
+                }else{
+                    map.set(num1,i);
+                }
+            }
+        };
+        
+
+    </script>
+</body>
+
+</html>
