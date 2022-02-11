@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function linkedList() {
+            // 节点定义
+            let Node = function(ele) {
+                this.ele = ele;
+                this.next = null;
+            }
+
+            let length = 0,
+                head = null;
+
+            this.append = (ele) => {
+                let node = new Node(ele),
+                    current;
+                
+                if(!head) {
+                    head = node;
+                } else {
+                    current = head;
+                    while(current.next) {
+                        current = current.next;
+                    }
+                    current.next = node;
+                }
+                
+                length ++;
+                return true;
+            }
+
+            this.insert = (position, ele) => {
+                if(position >= 0 && position <= length) {
+                    let node = new Node(ele),
+                        current = head,
+                        previous,
+                        index = 0
+
+                    if(position === 0) {
+                        node.next = current;
+                        head = node;
+                    } else {
+                        while(index++ < position) {
+                            previous = current;
+                            current = current.next;
+                        }
+                        node.next = current;
+                        previous.next = node;
+                    }
+
+
+                } else {
+                    return false;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
