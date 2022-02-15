@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var addTwoNumbers = function(l1, l2) {
+            let node = new ListNode();
+            let num1 = l1.val, num2 = l2.val, num3, current, n = 1;
+            while(l1.next) {
+                current = l1.next
+                num1 = current.val + "" + num1;
+                l1 = l1.next
+            }
+            while(l2.next) {
+                current = l2.next
+                num2 = current.val + "" + num2;
+                l2 = l2.next
+            }
+            num3 = Number(num1) + Number(num2)
+            let length = num3.toString().length;
+            current = node;
+            while(length > 0) {
+                current.val = num3 % (10 ** n);
+                current.next = new ListNode();
+                current = current.next;
+                n ++;
+                length --;
+            }
+            return node;
+        };
+    </script>
+</body>
+</html>
