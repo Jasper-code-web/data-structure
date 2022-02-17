@@ -8,6 +8,12 @@
 </head>
 <body>
     <script>
+        // 大数字相加会变成科学计数法
+        // add（大数字相加方法实现思路，返回字符串形式）
+        // 接收两个字符串str1, str2。用String.prototype.split()方法将字符串分割成数组
+        // 创建一个flag变量，flag加等于str1.pop() + str2.pop()。（这里使用~~运算符，它可以将undefine转换为0）
+        // 创建一个result字符串变量，result += flag % 10
+        // flag = flag > 9。判断flag是否大于9。如果大于9,则返回true,true + num = 1 + num;反之返回false,false + num = 0 + num
         var addTwoNumbers = function(l1, l2) {
             let node = new ListNode();
             let num1 = l1.val.toString(), num2 = l2.val.toString(), num3, current;
