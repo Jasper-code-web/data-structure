@@ -10,26 +10,38 @@
     <script>
         var addTwoNumbers = function(l1, l2) {
             let node = new ListNode();
-            let num1 = l1.val, num2 = l2.val, num3, current, n = 1;
+            let num1 = l1.val.toString(), num2 = l2.val.toString(), num3, current;
             while(l1.next) {
-                current = l1.next
-                num1 = current.val + "" + num1;
-                l1 = l1.next
+                num1 = l1.next.val + "" + num1;
+                l1 = l1.next;
             }
             while(l2.next) {
-                current = l2.next
+                current = l2.next;
                 num2 = current.val + "" + num2;
-                l2 = l2.next
+                l2 = l2.next;
             }
-            num3 = Number(num1) + Number(num2)
-            let length = num3.toString().length;
+            function add(str1, str2) {
+                str1 = str1.split("");
+                str2 = str2.split("");
+                let flag = 0
+                let result = ""
+                while(str1.length || str2.length || flag) {
+                    flag += ~~str1.pop() + ~~str2.pop();
+                    result = flag % 10 + result;
+                    flag = flag > 9;
+                }
+                return result;
+            }
+            num3 = add(num1, num2);
+            let length = num3.length;
+            num3 = num3.split("")
             current = node;
-            while(length > 0) {
-                current.val = num3 % (10 ** n);
-                current.next = new ListNode();
-                current = current.next;
-                n ++;
-                length --;
+            while(num3.length > 0) {
+                current.val = num3.pop();
+                if(num3.length !== 0) {
+                    current.next = new ListNode();
+                    current = current.next;
+                }
             }
             return node;
         };
