@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function linkedList() {
+            // 节点(静态属性：node包含一个存储数据的ele属性，和一个指向下一个元素的next属性)
+            let Node = function(ele) {
+                this.ele = ele;
+                this.next = null;
+            }
+
+            // length静态属性表示链表长度
+            // head静态属性表示链表第一个节点
+            let length = 0,
+                head = null;
+
+            // append方法
+            // 接收要存储的数据
+            // 实例化一个node,创建一个current变量。
+            // 如果没有head则把node赋值给head; 
+            // 如果存在head,则把head赋值给current。使用while循环遍历current，如果current存在next属性,将current.next
+            // 赋值给current,继续循环。直到next属性为空，将新创建的node示例赋值给current。length++，返回true
+            this.append = (ele) => {
+                let node = new Node(ele),
+                    current;
+
+                if(!head) {
+                    head = node;
+                } else {
+                    current = head;
+                    while(current.next) {
+                        current = current.next
+                    }
+                    current = node
+                }
+                length ++;
+                return true;
+            }
+
+            // insert方法
+            // 接收一个位置数据，和一个要存储的数据
+            // 位置必须大于等于0小于length
+            // 实例化一个node节点，初始化一个current变量并把head赋值给它，初始化一个previous变量，初始化一个index表示索引
+            // 当传入的位置参数等于0,则把current赋值给node.next。然后把node赋值给head。
+            // 通过while循环index++ < position,每次循环将current赋值给previous,然后将current.next赋值给current；直到index
+            // 等于position。这样previous就保存了要插入位置的链的前半部分，current保存了要插入位置的链的后半部分。这时将node
+            // 赋值给previous.next,再将current赋值给node.next
+            this.insert = (position, ele) => {
+                if(position >= 0 && position <= length) {
+                    let node = new Node(ele),
+                        current = head,
+                        previous,
+                        index = 0
+
+                    if(position === 0) {
+                        node.next = current;
+                        head = node;
+                    } else {
+                        while(index++ < position) {
+                            previous = current;
+                            current = current.next;
+                        }
+                        node.next = current;
+                        previous.next = node;
+                    }
+
+                    length ++;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            // removeAt方法
+            // 接收一个索引参数position(position必须大于等于0，小于length)
+            // 初始化一个current变量并把head赋值给它，初始化一个previous变量，初始化一个index表示索引
+            // 当position等于0时，head = current.next
+            // 大于0时,通过while循环index++ < position,每次循环将current赋值给previous,然后将current.next赋值给current；直到index
+            // 大等于position。然后将current.next赋值给previous.next。这样就删除了current
+            // 返回被删除的元素数据
+            this.removeAt = (position) => {
+                if(position >= 0 && position < length) {
+                    let current = head,
+                    previous,
+                    index;
+                
+                    if(position === 0) {
+                        head = current.next
+                    } else {
+                        while(index ++ < position) {
+                            previous = current;
+                            current = current.next;
+                        }
+                        previous.next = current.next;
+                    }
+                    length --;
+                    return current.ele;
+                } else {
+                    return null;
+                }
+            }
+
+
+
+            // remove方法
+            this.remove = (element) => {
+                let current = head,
+                    previous;
+                if(current.ele === element) {
+                    head = current.next;
+                    length --;
+                    return true;
+                }
+                previous = current;
+                current = current.next;
+                while(current) {
+                    if(current.ele = element) {
+                        previous.next = current.next;
+                        length --;
+                        return true;
+                    } else {
+                        previous = current;
+                        current = current.next;
+                    }
+                }
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

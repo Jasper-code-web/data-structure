@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 大数字相加会变成科学计数法
+        // add（大数字相加方法实现思路，返回字符串形式）
+        // 接收两个字符串str1, str2。用String.prototype.split()方法将字符串分割成数组
+        // 创建一个flag变量，flag加等于str1.pop() + str2.pop()。（这里使用~~运算符，它可以将undefine转换为0）
+        // 创建一个result字符串变量，result += flag % 10
+        // flag = flag > 9。判断flag是否大于9。如果大于9,则返回true,true + num = 1 + num;反之返回false,false + num = 0 + num
+        var addTwoNumbers = function(l1, l2) {
+            let node = new ListNode();
+            let num1 = l1.val.toString(), num2 = l2.val.toString(), num3, current;
+            while(l1.next) {
+                num1 = l1.next.val + "" + num1;
+                l1 = l1.next;
+            }
+            while(l2.next) {
+                current = l2.next;
+                num2 = current.val + "" + num2;
+                l2 = l2.next;
+            }
+            function add(str1, str2) {
+                str1 = str1.split("");
+                str2 = str2.split("");
+                let flag = 0
+                let result = ""
+                while(str1.length || str2.length || flag) {
+                    flag += ~~str1.pop() + ~~str2.pop();
+                    result = flag % 10 + result;
+                    flag = flag > 9;
+                }
+                return result;
+            }
+            num3 = add(num1, num2);
+            let length = num3.length;
+            num3 = num3.split("")
+            current = node;
+            while(num3.length > 0) {
+                current.val = num3.pop();
+                if(num3.length !== 0) {
+                    current.next = new ListNode();
+                    current = current.next;
+                }
+            }
+            return node;
+        };
+    </script>
+</body>
+</html>
